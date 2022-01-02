@@ -1,0 +1,8 @@
+name: AfnwCore2
+version: '${project.version}'
+main: net.azisaba.afnw.afnwcore2.AfnwCore2
+api-version: 1.17
+prefix: AfnwCore2
+authors: [ merunno, AfnwTeam ]
+description: AzisabaNetwork "A Fall New World" main plugin.
+website: https://github.com/AfnwTeam/AfnwCore2
