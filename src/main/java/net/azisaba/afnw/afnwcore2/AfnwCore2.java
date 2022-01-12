@@ -1,7 +1,7 @@
 package net.azisaba.afnw.afnwcore2;
 
 import net.azisaba.afnw.afnwcore2.commands.*;
-import org.bukkit.ChatColor;
+import net.azisaba.afnw.afnwcore2.listener.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -12,8 +12,6 @@ public final class AfnwCore2 extends JavaPlugin {
      * コマンドの実行結果時に表示するprefix
      */
     public static String commandSenderPrefix = "[AfnwCore]";
-    public static ChatColor colorYellow = ChatColor.YELLOW;
-    public static ChatColor colorRed = ChatColor.RED;
 
     @Override
     public void onEnable() {
@@ -26,6 +24,9 @@ public final class AfnwCore2 extends JavaPlugin {
         Objects.requireNonNull(getCommand("vote")).setExecutor(new TicketCommand(this));
         getLogger().warning("コマンドを登録しました。");
 
+        // イベント登録
+        getServer().getPluginManager().registerEvents(new PlayerJoinQuitEvent(this), this);
+
         // configの設定
         saveDefaultConfig();
         getLogger().warning("Configを設定しました。");
@@ -35,5 +36,5 @@ public final class AfnwCore2 extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() { getLogger().info("正常に終了しました。"); }
+    public void onDisable() { getLogger().info("終了しました。"); }
 }
