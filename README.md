@@ -1,6 +1,6 @@
 # AfnwCore2
 
-[![GitHub Actions / CodeQL](https://github.com/AfnwTeam/AfnwCore2/blob/master/.github/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AfnwTeam/AfnwCore2/blob/master/.github/workflows/codeql-analysis.yml)
+[![GitHub Actions](https://github.com/AfnwTeam/AfnwCore2/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AfnwTeam/AfnwCore2/blob/master/.github/workflows/codeql-analysis.yml)
 
 ```
 $ git clone https://github.com/AfnwTeam/AfnwCore2.git
