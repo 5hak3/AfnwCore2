@@ -6,11 +6,16 @@ prefix: AfnwCore2
 authors: [ merunno, AfnwTeam ]
 description: AzisabaNetwork "A Fall New World" main plugin.
 website: https://github.com/AfnwTeam/AfnwCore2
+depend:
+  - Essentials
+  - Multiverse-Core
 
 permissions:
   afnwcore2.commands.voteTicket:
     default: op
   afnwcore2.commands.giveTicket:
+    default: op
+  afnwcore2.lobby.op:
     default: op
 
 
@@ -23,4 +28,6 @@ commands:
   afnw:
     description: チケットを消費して配布アイテムを獲得します。
   vote:
-    description: URLを表示
+    description: URLを表示します。
+  lobby:
+    description: lobbyに帰ります。

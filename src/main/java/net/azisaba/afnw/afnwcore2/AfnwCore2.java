@@ -22,10 +22,13 @@ public final class AfnwCore2 extends JavaPlugin {
         Objects.requireNonNull(getCommand("ticket#give")).setExecutor(new TicketCommand(this));
         Objects.requireNonNull(getCommand("afnw")).setExecutor(new TicketCommand(this));
         Objects.requireNonNull(getCommand("vote")).setExecutor(new TicketCommand(this));
+        Objects.requireNonNull(getCommand("lobby")).setExecutor(new LobbyCommand());
         getLogger().warning("コマンドを登録しました。");
 
         // イベント登録
         getServer().getPluginManager().registerEvents(new PlayerJoinQuitEvent(this), this);
+        getServer().getPluginManager().registerEvents(new AFKTeleporter(), this);
+        getServer().getPluginManager().registerEvents(new Lobby(), this);
 
         // configの設定
         saveDefaultConfig();

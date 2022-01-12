@@ -25,6 +25,8 @@ public class PlayerJoinQuitEvent implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
+        // 備考: 参加時にLobbyに飛ばす処理はLobby#onJoin()で対応
+
         Player p = e.getPlayer();
         String pName = e.getPlayer().getName();
 
