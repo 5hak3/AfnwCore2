@@ -2,6 +2,7 @@ package net.azisaba.afnw.afnwcore2.commands;
 
 import net.azisaba.afnw.afnwcore2.AfnwCore2;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,12 +29,15 @@ public class TicketCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
+    static ChatColor colorYellow = ChatColor.YELLOW;
+    static ChatColor colorRed = ChatColor.RED;
+
     // チケットを作成する。
     private static final ItemStack itemStack = new ItemStack(Material.PAPER, 1);
     static {
         ItemMeta itemMeta = itemStack.getItemMeta();
         assert itemMeta != null; // nullの場合は返す
-        itemMeta.setDisplayName(AfnwCore2.colorYellow + "Afnwチケット");
+        itemMeta.setDisplayName(colorYellow + "Afnwチケット");
         List<String> Lores = new ArrayList<>();
         Lores.add("投票特典と交換できるアイテムです。インベントリに入れた状態で /afnw を実行すると交換できます。");
         itemMeta.setLore(Lores);
@@ -63,10 +67,10 @@ public class TicketCommand implements CommandExecutor {
 
                 p.sendMessage("=================");
                 p.sendMessage("");
-                p.sendMessage(AfnwCore2.colorYellow + "投票特典として以下のアイテムが付与されました。");
+                p.sendMessage(colorYellow + "投票特典として以下のアイテムが付与されました。");
                 p.sendMessage("[+] Afnwチケット ×" + voteTicketSize);
                 p.sendMessage("");
-                p.sendMessage(AfnwCore2.colorYellow + "この特典とアイテムを交換するには /afnw を実行してください。");
+                p.sendMessage(colorYellow + "この特典とアイテムを交換するには /afnw を実行してください。");
                 p.sendMessage("");
                 p.sendMessage("=================");
                 Log.info("[AfnwCore2] " + p.getName() + "に投票特典が配布されました。");
@@ -74,22 +78,22 @@ public class TicketCommand implements CommandExecutor {
             }
             case "ticket#give": {
                 if(args.length == 0) {
-                    sender.sendMessage(AfnwCore2.commandSenderPrefix + AfnwCore2.colorRed + " コマンドの構文が正しくありません。\n/ticket#give <target> <size>");
+                    sender.sendMessage(AfnwCore2.commandSenderPrefix + colorRed + " コマンドの構文が正しくありません。\n/ticket#give <target> <size>");
                 } else if(args.length == 1) {
-                    sender.sendMessage(AfnwCore2.commandSenderPrefix + AfnwCore2.colorRed + " 配布する対象プレイヤーを指定してください。ただし、Afnwにいるプレイヤーのみを指定できます。");
+                    sender.sendMessage(AfnwCore2.commandSenderPrefix + colorRed + " 配布する対象プレイヤーを指定してください。ただし、Afnwにいるプレイヤーのみを指定できます。");
                 } else if(args.length == 2) {
-                    sender.sendMessage(AfnwCore2.commandSenderPrefix + AfnwCore2.colorRed + " 配布する数を指定してください。");
+                    sender.sendMessage(AfnwCore2.commandSenderPrefix + colorRed + " 配布する数を指定してください。");
                 }
 
                 Player giveP = Bukkit.getPlayer(args[0]);
                 int giveSize = Integer.parseInt(args[1]);
 
                 if(giveP == null) {
-                    sender.sendMessage(AfnwCore2.commandSenderPrefix + AfnwCore2.colorRed + " プレイヤーが存在しません。");
+                    sender.sendMessage(AfnwCore2.commandSenderPrefix + colorRed + " プレイヤーが存在しません。");
                     return true;
                 }
                 if(giveSize == 0) {
-                    sender.sendMessage(AfnwCore2.commandSenderPrefix + AfnwCore2.colorRed + " 0は指定できません。");
+                    sender.sendMessage(AfnwCore2.commandSenderPrefix + colorRed + " 0は指定できません。");
                     return true;
                 }
 
@@ -98,13 +102,13 @@ public class TicketCommand implements CommandExecutor {
                 for(i = 0; i < giveSize; i++) {
                     giveTarget.addItem(itemStack);
                 }
-                sender.sendMessage(AfnwCore2.commandSenderPrefix + AfnwCore2.colorYellow + " チケットの配布に成功しました。");
+                sender.sendMessage(AfnwCore2.commandSenderPrefix + colorYellow + " チケットの配布に成功しました。");
                 giveP.sendMessage("=================");
                 giveP.sendMessage("");
-                giveP.sendMessage(AfnwCore2.colorYellow + "投票特典が補填されました。");
+                giveP.sendMessage(colorYellow + "投票特典が補填されました。");
                 giveP.sendMessage("[+] Afnwチケット×" + giveSize);
                 giveP.sendMessage("");
-                giveP.sendMessage(AfnwCore2.colorYellow + "この特典とアイテムを交換するには /afnw を実行してください。");
+                giveP.sendMessage(colorYellow + "この特典とアイテムを交換するには /afnw を実行してください。");
                 giveP.sendMessage("");
                 giveP.sendMessage("=================");
                 Log.info("[AfnwCore2] " + sender.getName() + "が" + giveP.getName() + "に" + giveSize + "枚のチケットを配布しました。");
@@ -114,13 +118,13 @@ public class TicketCommand implements CommandExecutor {
                 Player p = (Player) sender;
                 Inventory pInv = p.getInventory();
 
-                if(Arrays.stream(pInv.getContents()).noneMatch(item -> item != null && item.hasItemMeta() && (AfnwCore2.colorYellow + "Afnwチケット").equals(Objects.requireNonNull(Objects.requireNonNull(item.getItemMeta()).getDisplayName())))) {
-                    p.sendMessage(AfnwCore2.commandSenderPrefix + AfnwCore2.colorRed + " チケットが見つからないため、特典と交換できませんでした。特典と交換するには最低1枚のAfnwチケットが必要です。");
+                if(Arrays.stream(pInv.getContents()).noneMatch(item -> item != null && item.hasItemMeta() && (colorYellow + "Afnwチケット").equals(Objects.requireNonNull(Objects.requireNonNull(item.getItemMeta()).getDisplayName())))) {
+                    p.sendMessage(AfnwCore2.commandSenderPrefix + colorRed + " チケットが見つからないため、特典と交換できませんでした。特典と交換するには最低1枚のAfnwチケットが必要です。");
                     Log.warning("[AfnwCore2]" + p.getName() + "がアイテムの交換を受けようとしましたが、チケットがぬるぽのため交換失敗しました。 *");
                     return true;
                 }
                 if(pInv.firstEmpty() == -1) {
-                    p.sendMessage(AfnwCore2.commandSenderPrefix + AfnwCore2.colorRed + " インベントリがいっぱいのため、配布ができません。整理してから再実行してください。(チケットの消費はされていません。)");
+                    p.sendMessage(AfnwCore2.commandSenderPrefix + colorRed + " インベントリがいっぱいのため、配布ができません。整理してから再実行してください。(チケットの消費はされていません。)");
                     return true;
                 }
 
@@ -135,13 +139,13 @@ public class TicketCommand implements CommandExecutor {
                 pInv.addItem(itemStack, itemStack1);
                 p.sendMessage("=================");
                 p.sendMessage("");
-                p.sendMessage(AfnwCore2.colorYellow + "Afnwチケットと交換しました。");
+                p.sendMessage(colorYellow + "Afnwチケットと交換しました。");
                 p.sendMessage("[-] Afnwチケット ×1");
                 p.sendMessage("[+] 足場ブロック(確定) ×" + voteAfnwItemSize);
                 p.sendMessage("[+] " + itemStack.getType() + " ×" + voteAfnwScaffoldSize);
                 p.sendMessage("");
-                p.sendMessage(AfnwCore2.colorYellow + "このままチケットの交換を行う際は /afnw を実行してください。");
-                p.sendMessage(AfnwCore2.colorYellow + "ヒント: Java版では矢印キー\"↑\"を押すことで補完することができます。");
+                p.sendMessage(colorYellow + "このままチケットの交換を行う際は /afnw を実行してください。");
+                p.sendMessage(colorYellow + "ヒント: Java版では矢印キー\"↑\"を押すことで補完することができます。");
                 p.sendMessage("");
                 p.sendMessage("=================");
                 Log.info("[AfnwCore2 / Afnwチケットの交換] " + p.getName() + "がアイテムの交換を行いました。(足場 + " + itemStack.getType() + ")");
@@ -151,9 +155,9 @@ public class TicketCommand implements CommandExecutor {
                 Player p = (Player) sender;
                 p.sendMessage("=================");
                 p.sendMessage("");
-                p.sendMessage(AfnwCore2.colorYellow + "◆ Japan Minecraft Servers: ◆");
+                p.sendMessage(colorYellow + "◆ Japan Minecraft Servers: ◆");
                 p.sendMessage("https://minecraft.jp/servers/azisaba.net/vote");
-                p.sendMessage(AfnwCore2.colorYellow + "◆ MonoCraft: ◆");
+                p.sendMessage(colorYellow + "◆ MonoCraft: ◆");
                 p.sendMessage("https://monocraft.net/servers/xWBVrf1nqB2P0LxlMm2v");
                 p.sendMessage("");
                 p.sendMessage("=================");
