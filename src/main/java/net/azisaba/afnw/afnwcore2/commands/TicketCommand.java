@@ -151,7 +151,7 @@ public class TicketCommand implements CommandExecutor {
                 Log.info("[AfnwCore2 / Afnwチケットの交換] " + p.getName() + "がアイテムの交換を行いました。(足場 + " + itemStack.getType() + ")");
                 break;
             }
-            case "vote": {
+            case "vote#site": {
                 Player p = (Player) sender;
                 p.sendMessage("=================");
                 p.sendMessage("");
