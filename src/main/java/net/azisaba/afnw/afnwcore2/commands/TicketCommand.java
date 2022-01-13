@@ -152,15 +152,14 @@ public class TicketCommand implements CommandExecutor {
                 break;
             }
             case "vote#site": {
-                Player p = (Player) sender;
-                p.sendMessage("=================");
-                p.sendMessage("");
-                p.sendMessage(colorYellow + "◆ Japan Minecraft Servers: ◆");
-                p.sendMessage("https://minecraft.jp/servers/azisaba.net/vote");
-                p.sendMessage(colorYellow + "◆ MonoCraft: ◆");
-                p.sendMessage("https://monocraft.net/servers/xWBVrf1nqB2P0LxlMm2v");
-                p.sendMessage("");
-                p.sendMessage("=================");
+                sender.sendMessage("=================");
+                sender.sendMessage("");
+                sender.sendMessage(colorYellow + "◆ Japan Minecraft Servers: ◆");
+                sender.sendMessage("https://minecraft.jp/servers/azisaba.net/vote");
+                sender.sendMessage(colorYellow + "◆ MonoCraft: ◆");
+                sender.sendMessage("https://monocraft.net/servers/xWBVrf1nqB2P0LxlMm2v");
+                sender.sendMessage("");
+                sender.sendMessage("=================");
             }
         }
         return true;
