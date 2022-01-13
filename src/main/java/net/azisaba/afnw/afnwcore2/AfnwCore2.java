@@ -2,9 +2,12 @@ package net.azisaba.afnw.afnwcore2;
 
 import net.azisaba.afnw.afnwcore2.commands.*;
 import net.azisaba.afnw.afnwcore2.listener.*;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public final class AfnwCore2 extends JavaPlugin {
@@ -30,6 +33,10 @@ public final class AfnwCore2 extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new AFKTeleporter(), this);
         getServer().getPluginManager().registerEvents(new Lobby(), this);
+
+        // データの設定
+        Map<Player, Integer> pMap = new HashMap<>(); /* UUID, 残りライフ */
+        Map<String, Boolean> stateMap = new HashMap<>(); /* 状態の保存 */
 
         // configの設定
         saveDefaultConfig();
