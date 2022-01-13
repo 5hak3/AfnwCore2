@@ -6,7 +6,7 @@
 
     <groupId>net.azisaba.afnw</groupId>
     <artifactId>AfnwCore2</artifactId>
-    <version>1.1.0-PreliminaryBetaTest</version>
+    <version>1.2.0-PreliminaryBetaTest</version>
     <packaging>jar</packaging>
 
     <name>AfnwCore2</name>
