@@ -27,7 +27,7 @@ commands:
     usage: /ticket#give <target> <size>
   afnw:
     description: チケットを消費して配布アイテムを獲得します。
-  vote:
+  vote#site:
     description: URLを表示します。
   lobby:
     description: lobbyに帰ります。
