@@ -23,6 +23,7 @@ public final class AfnwCore2 extends JavaPlugin {
         Objects.requireNonNull(getCommand("ticket#give")).setExecutor(new TicketCommand(this));
         Objects.requireNonNull(getCommand("afnw")).setExecutor(new TicketCommand(this));
         Objects.requireNonNull(getCommand("lobby")).setExecutor(new LobbyCommand());
+        Objects.requireNonNull(getCommand("setvoteurlblock")).setExecutor(new LobbyCommand());
         Objects.requireNonNull(getCommand("vote#site")).setExecutor(new TicketCommand(this));
         getLogger().warning("コマンドを登録しました。");
 

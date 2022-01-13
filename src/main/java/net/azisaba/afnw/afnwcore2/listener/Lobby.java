@@ -1,14 +1,15 @@
 package net.azisaba.afnw.afnwcore2.listener;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import net.azisaba.afnw.afnwcore2.commands.TicketCommand;
+import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.command.Command;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
@@ -16,7 +17,10 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Lobby implements Listener {
@@ -98,6 +102,18 @@ public class Lobby implements Listener {
 
         event.setCancelled(true);
         event.getPlayer().sendMessage(ChatColor.RED + prefix + "ロビー内ではその操作はできません．");
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onBlockDamage (BlockDamageEvent event) {
+        // Interact対象のブロックが投票URL表示ブロックならvote#siteコマンドを実行させる
+        Block clickedBlock = event.getBlock();
+
+        if (clickedBlock.getType() == Material.EMERALD_BLOCK &&
+            ((String)(clickedBlock.getMetadata("management").get(0).value())).equalsIgnoreCase("getvoteurl")) {
+            event.getPlayer().performCommand("vote#site");
+            return;
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

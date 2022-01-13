@@ -1,14 +1,17 @@
 package net.azisaba.afnw.afnwcore2.commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import net.azisaba.afnw.afnwcore2.AfnwCore2;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.plugin.Plugin;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class LobbyCommand implements CommandExecutor {
@@ -23,6 +26,22 @@ public class LobbyCommand implements CommandExecutor {
 
         Player player = (Player)sender;
         World lobby = Objects.requireNonNull(Bukkit.getWorld("lobby"));
+
+        // setvoteurlblockは投票URL表示ブロックを設置する
+        // Lobbyでこれを置くとMetaDataを設定するようにする
+        if (command.getName().equalsIgnoreCase("setvoteurlblock")) {
+            Location ploc = ((Player)sender).getLocation();
+            if (ploc.getWorld() != lobby) {
+                sender.sendMessage(ChatColor.RED + prefix + "lobby限定コマンドです．ロビーで実行してください．");
+                return true;
+            }
+
+            lobby.getBlockAt(ploc).setType(Material.EMERALD_BLOCK);
+            lobby.getBlockAt(ploc).setMetadata("management", new FixedMetadataValue(Bukkit.getPluginManager().getPlugin("AfnwCore2"), "getvoteurl"));
+            return true;
+        }
+        else if (!command.getName().equalsIgnoreCase("lobby")) return true;
+
         Location point = lobby.getSpawnLocation();
 
         if (Objects.requireNonNull(player.getWorld()) == lobby) {

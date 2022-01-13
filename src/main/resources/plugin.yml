@@ -15,6 +15,8 @@ permissions:
     default: op
   afnwcore2.commands.giveTicket:
     default: op
+  afnwcore2.commands.setVoteUrlBlock:
+    default: op
   afnwcore2.lobby.op:
     default: op
 
@@ -25,6 +27,8 @@ commands:
   ticket#give:
     permission: afnwcore2.commands.giveTicket
     usage: /ticket#give <target> <size>
+  setvoteurlblock:
+    permission: afnwcore2.commands.setVoteUrlBlock
   afnw:
     description: チケットを消費して配布アイテムを獲得します。
   vote#site:
