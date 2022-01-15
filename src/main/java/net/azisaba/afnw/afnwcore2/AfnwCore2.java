@@ -2,9 +2,7 @@ package net.azisaba.afnw.afnwcore2;
 
 import net.azisaba.afnw.afnwcore2.commands.*;
 import net.azisaba.afnw.afnwcore2.listener.*;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +35,11 @@ public final class AfnwCore2 extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new AFKTeleporter(), this);
         getServer().getPluginManager().registerEvents(new Lobby(), this);
+
+        // 状態登録
+        if(stateMap.containsValue(true) || stateMap.containsValue(null)) {
+            stateMap.put("戦闘状態", false);
+        }
 
         // configの設定
         saveDefaultConfig();
