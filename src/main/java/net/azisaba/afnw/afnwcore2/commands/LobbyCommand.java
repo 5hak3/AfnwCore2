@@ -1,20 +1,25 @@
 package net.azisaba.afnw.afnwcore2.commands;
 
-import net.azisaba.afnw.afnwcore2.AfnwCore2;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LobbyCommand implements CommandExecutor {
+    private final JavaPlugin plugin;
+
+    public LobbyCommand(JavaPlugin plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         final String prefix = "[AfnwCore2] ";
@@ -25,22 +30,16 @@ public class LobbyCommand implements CommandExecutor {
         }
 
         Player player = (Player)sender;
-        World lobby = Objects.requireNonNull(Bukkit.getWorld("lobby"));
 
         // setvoteurlblockは投票URL表示ブロックを設置する
         // Lobbyでこれを置くとMetaDataを設定するようにする
         if (command.getName().equalsIgnoreCase("setvoteurlblock")) {
-            Location ploc = ((Player)sender).getLocation();
-            if (ploc.getWorld() != lobby) {
-                sender.sendMessage(ChatColor.RED + prefix + "lobby限定コマンドです．ロビーで実行してください．");
-                return true;
-            }
-
-            lobby.getBlockAt(ploc).setType(Material.EMERALD_BLOCK);
-            lobby.getBlockAt(ploc).setMetadata("management", new FixedMetadataValue(Bukkit.getPluginManager().getPlugin("AfnwCore2"), "getvoteurl"));
+            this.setVoteUrlBlock();
             return true;
         }
         else if (!command.getName().equalsIgnoreCase("lobby")) return true;
+
+        World lobby = Objects.requireNonNull(Bukkit.getWorld("lobby"));
 
         Location point = lobby.getSpawnLocation();
 
@@ -68,5 +67,15 @@ public class LobbyCommand implements CommandExecutor {
             );
         }
         return true;
+    }
+
+    public void setVoteUrlBlock () {
+        World lobby = Objects.requireNonNull(Bukkit.getWorld("lobby"));
+        // 地獄みたいな文 (気が向いたら直して)
+        List<Integer> locarr = Arrays.stream(Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(this.plugin.getConfig().getConfigurationSection("lobby")).getConfigurationSection("voteblock")).getString("location")).split(",", 3)).map(Integer::parseInt).collect(Collectors.toList());
+        Location ploc = new Location(lobby, locarr.get(0), locarr.get(1), locarr.get(2));
+
+        lobby.getBlockAt(ploc).setType(Material.EMERALD_BLOCK);
+        lobby.getBlockAt(ploc).setMetadata("management", new FixedMetadataValue(Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("AfnwCore2")), "getvoteurl"));
     }
 }

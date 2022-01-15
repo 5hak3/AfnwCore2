@@ -1,9 +1,7 @@
 package net.azisaba.afnw.afnwcore2.listener;
 
-import net.azisaba.afnw.afnwcore2.commands.TicketCommand;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.command.Command;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,10 +15,7 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Lobby implements Listener {
@@ -110,9 +105,8 @@ public class Lobby implements Listener {
         Block clickedBlock = event.getBlock();
 
         if (clickedBlock.getType() == Material.EMERALD_BLOCK &&
-            ((String)(clickedBlock.getMetadata("management").get(0).value())).equalsIgnoreCase("getvoteurl")) {
+            ((String)(Objects.requireNonNull(clickedBlock.getMetadata("management").get(0).value()))).equalsIgnoreCase("getvoteurl")) {
             event.getPlayer().performCommand("vote#site");
-            return;
         }
     }
 
