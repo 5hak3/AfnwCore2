@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public final class AfnwCore2 extends JavaPlugin {
 
@@ -16,6 +17,8 @@ public final class AfnwCore2 extends JavaPlugin {
      * コマンドの実行結果時に表示するprefix
      */
     public static String commandSenderPrefix = "[AfnwCore]";
+    public static Map<UUID, Integer> pMap = new HashMap<>();
+    public static Map<String, Boolean> stateMap = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -33,10 +36,6 @@ public final class AfnwCore2 extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new AFKTeleporter(), this);
         getServer().getPluginManager().registerEvents(new Lobby(), this);
-
-        // データの設定
-        Map<Player, Integer> pMap = new HashMap<>(); /* UUID, 残りライフ */
-        Map<String, Boolean> stateMap = new HashMap<>(); /* 状態の保存 */
 
         // configの設定
         saveDefaultConfig();
