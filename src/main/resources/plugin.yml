@@ -15,6 +15,10 @@ permissions:
     default: op
   afnwcore2.commands.giveTicket:
     default: op
+  afnwcore2.commands.reload#config:
+    default: op
+  afnwcore2.gamemode.change:
+    default: op
   afnwcore2.lobby.op:
     default: op
 
@@ -31,3 +35,6 @@ commands:
     description: URLを表示します。
   lobby:
     description: lobbyに帰ります。
+  reload#config:
+    permission: afnwcore2.commands.reload#config
+
