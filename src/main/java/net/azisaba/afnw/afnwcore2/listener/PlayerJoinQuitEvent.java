@@ -36,7 +36,7 @@ public class PlayerJoinQuitEvent implements Listener {
 
         // 全員共通
 
-        e.setJoinMessage(colorYellow + "[+] " + colorYellow + pName + colorWhite + "がログインしました。");
+        e.setJoinMessage(colorYellow + pName + colorWhite + "がログインしました。");
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -66,6 +66,6 @@ public class PlayerJoinQuitEvent implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         String pName = e.getPlayer().getName();
-        e.setQuitMessage(colorYellow + "- " + colorYellow + pName + colorWhite + "がログインしました。");
+        e.setQuitMessage(colorYellow + pName + colorWhite + "がログアウトしました。");
     }
 }
