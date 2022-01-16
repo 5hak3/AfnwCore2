@@ -14,6 +14,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class PlayerJoinQuitEvent implements Listener {
 
     private final JavaPlugin plugin;
+
+    /**
+     * 入室退出処理
+     * Development by @meru
+     */
     public PlayerJoinQuitEvent(JavaPlugin plugin){
         this.plugin = plugin;
     }

@@ -11,6 +11,12 @@ import org.bukkit.event.Listener;
 
 import java.util.Objects;
 
+/**
+ * AFKに関する処理
+ *
+ * API: essentials api
+ * Development by @5hak_3
+ */
 public class AFKTeleporter implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onAFK (AfkStatusChangeEvent event) {

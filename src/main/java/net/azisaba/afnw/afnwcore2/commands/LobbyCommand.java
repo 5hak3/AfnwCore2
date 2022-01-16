@@ -11,6 +11,10 @@ import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
+/**
+ * ロビー関連のコマンド。
+ * Development by @5hak_3
+ */
 public class LobbyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

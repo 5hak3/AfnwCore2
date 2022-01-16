@@ -14,6 +14,10 @@ public class ConfigReloadCommand implements CommandExecutor {
 
     private final JavaPlugin plugin;
 
+    /**
+     * configのリロード機構
+     * Development by @meru
+     */
     public ConfigReloadCommand(JavaPlugin plugin) { this.plugin = plugin; }
 
     ChatColor colorAqua = ChatColor.AQUA;

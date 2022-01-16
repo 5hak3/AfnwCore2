@@ -19,6 +19,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Objects;
 
+/**
+ * ロビーのオペレーターテレポート、及び各種イベントキャンセラー
+ * Development by @5hak_3
+ */
 public class Lobby implements Listener {
     private static final String prefix = "[Afnw Core2] ";
 

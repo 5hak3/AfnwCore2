@@ -9,6 +9,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * メインファイル
+ * 各クラスを読み込み、コマンド登録・イベント登録などします。
+ */
 public final class AfnwCore2 extends JavaPlugin {
 
     /**
