@@ -55,10 +55,12 @@ public class PlayerJoinQuitEvent implements Listener {
         }.runTaskLater(JavaPlugin.getPlugin(mainJava), 20*10);
         p.sendTitle(colorPurple + "Afnw", "オープンベータ", 3, 60, 1);
 
-        // viaverでバージョン確認して1.17(775)未満だったら警告
-        if (Via.getAPI().getPlayerVersion(p.getUniqueId()) < 775) {
-            p.sendMessage(colorRed + "A Fall New Worldの推奨バージョンは1.17以上です。");
-            p.sendMessage(colorRed + "推奨バージョン未満で接続していることにより生じた問題はサポート対象外です。");
+        // viaverでバージョン確認して1.17(775)未満か1.17.1より大きければ警告
+        int pVer = Via.getAPI().getPlayerVersion(p.getUniqueId());
+        if (pVer < 775 || pVer > 756) {
+            p.sendMessage(colorRed + "【警告】");
+            p.sendMessage(colorRed + "Minecraft JavaEdition v1.17・v1.17.1 以外での接続を検知しました。");
+            p.sendMessage(colorRed + "推奨バージョン以外で接続していることにより生じた問題はサポート対象外です。ご注意ください。");
         }
 
         // BEユーザーのみ
