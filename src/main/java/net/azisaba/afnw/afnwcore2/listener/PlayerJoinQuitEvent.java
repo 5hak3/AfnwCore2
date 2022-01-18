@@ -11,6 +11,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.viaversion.viaversion.api.Via;
+
 public class PlayerJoinQuitEvent implements Listener {
 
     private final JavaPlugin plugin;
@@ -52,6 +54,14 @@ public class PlayerJoinQuitEvent implements Listener {
             }
         }.runTaskLater(JavaPlugin.getPlugin(mainJava), 20*10);
         p.sendTitle(colorPurple + "Afnw", "オープンベータ", 3, 60, 1);
+
+        // viaverでバージョン確認して1.17(775)未満か1.17.1より大きければ警告
+        int pVer = Via.getAPI().getPlayerVersion(p.getUniqueId());
+        if (pVer < 775 || pVer > 756) {
+            p.sendMessage(colorRed + "【警告】");
+            p.sendMessage(colorRed + "Minecraft JavaEdition v1.17・v1.17.1 以外での接続を検知しました。");
+            p.sendMessage(colorRed + "推奨バージョン以外で接続していることにより生じた問題はサポート対象外です。ご注意ください。");
+        }
 
         // BEユーザーのみ
 

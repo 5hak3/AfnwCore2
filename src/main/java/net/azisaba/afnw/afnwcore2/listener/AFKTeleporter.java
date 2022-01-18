@@ -18,11 +18,15 @@ import java.util.Objects;
  * Development by @5hak_3
  */
 public class AFKTeleporter implements Listener {
+    /**
+     * AfkStatusChangeEventはなんかいい感じにアレ
+     * @param event Essentialsのやつ
+     */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onAFK (AfkStatusChangeEvent event) {
         World lobby = Bukkit.getWorld("lobby");
         if (Objects.isNull(lobby)) return;
-        // ハードコードしてもいいよね？
+        // Config作るのめんどいからハードコードしてもいいよね？
         Location point = new Location(lobby, 44, 61, 5);
 
         // adminはテレポートしない

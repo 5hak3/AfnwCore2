@@ -9,11 +9,15 @@ website: https://github.com/AfnwTeam/AfnwCore2
 depend:
   - Essentials
   - Multiverse-Core
+  - ViaVersion
+  - MythicMobs
 
 permissions:
   afnwcore2.commands.voteTicket:
     default: op
   afnwcore2.commands.giveTicket:
+    default: op
+  afnwcore2.commands.setVoteUrlBlock:
     default: op
   afnwcore2.commands.reload#config:
     default: op
@@ -29,6 +33,8 @@ commands:
   ticket#give:
     permission: afnwcore2.commands.giveTicket
     usage: /ticket#give <target> <size>
+  setvoteurlblock:
+    permission: afnwcore2.commands.setVoteUrlBlock
   afnw:
     description: チケットを消費して配布アイテムを獲得します。
   vote#site:
