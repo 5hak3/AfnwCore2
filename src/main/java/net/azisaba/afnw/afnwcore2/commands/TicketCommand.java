@@ -1,5 +1,6 @@
 package net.azisaba.afnw.afnwcore2.commands;
 
+import io.lumine.xikage.mythicmobs.MythicMobs;
 import net.azisaba.afnw.afnwcore2.AfnwCore2;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,7 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+//import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -34,16 +35,19 @@ public class TicketCommand implements CommandExecutor {
     static ChatColor colorRed = ChatColor.RED;
 
     // チケットを作成する。
-    private static final ItemStack itemStack = new ItemStack(Material.PAPER, 1);
-    static {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        assert itemMeta != null; // nullの場合は返す
-        itemMeta.setDisplayName(colorYellow + "Afnwチケット");
-        List<String> Lores = new ArrayList<>();
-        Lores.add("投票特典と交換できるアイテムです。インベントリに入れた状態で /afnw を実行すると交換できます。");
-        itemMeta.setLore(Lores);
-        itemStack.setItemMeta(itemMeta);
-    }
+//    private static final ItemStack itemStack = new ItemStack(Material.PAPER, 1);
+//    static {
+//        ItemMeta itemMeta = itemStack.getItemMeta();
+//        assert itemMeta != null; // nullの場合は返す
+//        itemMeta.setDisplayName(colorYellow + "Afnwチケット");
+//        List<String> Lores = new ArrayList<>();
+//        Lores.add("投票特典と交換できるアイテムです。インベントリに入れた状態で /afnw を実行すると交換できます。");
+//        itemMeta.setLore(Lores);
+//        itemStack.setItemMeta(itemMeta);
+//    }
+    // MMから引っ張る
+    private final MythicMobs mm = Objects.requireNonNull((MythicMobs) Bukkit.getPluginManager().getPlugin("MythicMobs"));
+    private final ItemStack itemStack = Objects.requireNonNull(mm.getItemManager()).getItemStack("Vote");
 
     private static final Logger Log = Bukkit.getLogger();
 

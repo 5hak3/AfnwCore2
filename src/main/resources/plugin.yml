@@ -10,6 +10,7 @@ depend:
   - Essentials
   - Multiverse-Core
   - ViaVersion
+  - MythicMobs
 
 permissions:
   afnwcore2.commands.voteTicket:
