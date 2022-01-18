@@ -17,14 +17,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
 import java.util.logging.Logger;
 
-
-/**
- * 投票周りのシステムを制御する。チケット配布・チケットを使っての配布
- */
 public class TicketCommand implements CommandExecutor {
 
     private final JavaPlugin plugin;
 
+
+    /**
+     * 投票周りのシステムを制御する。チケット配布・チケットを使っての配布
+     * Development by @meru
+     */
     public TicketCommand(JavaPlugin plugin){
         this.plugin = plugin;
     }

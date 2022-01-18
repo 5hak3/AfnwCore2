@@ -16,6 +16,11 @@ import com.viaversion.viaversion.api.Via;
 public class PlayerJoinQuitEvent implements Listener {
 
     private final JavaPlugin plugin;
+
+    /**
+     * 入室退出処理
+     * Development by @meru
+     */
     public PlayerJoinQuitEvent(JavaPlugin plugin){
         this.plugin = plugin;
     }
@@ -24,6 +29,7 @@ public class PlayerJoinQuitEvent implements Listener {
     ChatColor colorRed = ChatColor.RED;
     ChatColor colorYellow = ChatColor.YELLOW;
     ChatColor colorWhite = ChatColor.WHITE;
+    Class<AfnwCore2> mainJava = AfnwCore2.class;
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -37,7 +43,7 @@ public class PlayerJoinQuitEvent implements Listener {
 
         // 全員共通
 
-        e.setJoinMessage(colorYellow + "[+] " + colorYellow + pName + colorWhite + "がログインしました。");
+        e.setJoinMessage(colorYellow + pName + colorWhite + "がログインしました。");
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -46,7 +52,7 @@ public class PlayerJoinQuitEvent implements Listener {
                 p.sendMessage(colorYellow + "バージョン: " + colorWhite + plugin.getDescription().getVersion());
                 p.sendMessage(colorYellow + "お知らせ: " + colorWhite + notice);
             }
-        }.runTaskLater(JavaPlugin.getPlugin(AfnwCore2.class), 20*10);
+        }.runTaskLater(JavaPlugin.getPlugin(mainJava), 20*10);
         p.sendTitle(colorPurple + "Afnw", "オープンベータ", 3, 60, 1);
 
         // viaverでバージョン確認して1.17(775)未満だったら警告
@@ -58,12 +64,21 @@ public class PlayerJoinQuitEvent implements Listener {
         // BEユーザーのみ
 
         if(!(pName.startsWith("."))) return;
-        p.sendMessage(colorRed + "Minecraft Bedrock Edition(統合版)クライアントで接続していることを検知しました。\nAfnwではBedrock Editionでのプレイをサポートしていません。(非推奨)\nプレイする際はJava Editionからどうぞ。");
+        /*
+         * 他のプラグインのメッセージに警告が流されてしまうので "全員共通" のように12tick遅く送信させる
+         * 備考: https://github.com/AfnwTeam/AfnwCore2/issues/2
+         */
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                p.sendMessage(colorRed + "【警告】\nMinecraft Bedrock Edition(統合版)クライアントで接続していることを検知しました。\nAfnwではBedrock Editionでのプレイをサポートしていません。(非推奨)\nプレイする際はJava Editionを使用することをお勧めします。");
+            }
+        }.runTaskLater(JavaPlugin.getPlugin(mainJava), 20*12);
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         String pName = e.getPlayer().getName();
-        e.setQuitMessage(colorYellow + "- " + colorYellow + pName + colorWhite + "がログインしました。");
+        e.setQuitMessage(colorYellow + pName + colorWhite + "がログアウトしました。");
     }
 }

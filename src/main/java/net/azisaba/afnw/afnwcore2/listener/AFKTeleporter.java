@@ -12,7 +12,10 @@ import org.bukkit.event.Listener;
 import java.util.Objects;
 
 /**
- * EssentialsXでAFKになったら所定の座標に飛ばすやつ
+ * AFKに関する処理
+ *
+ * API: essentials api
+ * Development by @5hak_3
  */
 public class AFKTeleporter implements Listener {
     /**

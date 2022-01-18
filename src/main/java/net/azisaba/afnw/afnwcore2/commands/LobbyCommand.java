@@ -14,7 +14,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * ロビーに関係するコマンド類
+ * ロビー関連のコマンド。
+ * Development by @5hak_3
  */
 public class LobbyCommand implements CommandExecutor {
     private final JavaPlugin plugin;
