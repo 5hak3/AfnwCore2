@@ -138,9 +138,8 @@ public class Lobby implements Listener {
 
         // クリックされたブロックがエメラルドでmanagementにgetvoteurlを持つなら"vote#site"を実行させる
         if (clickedBlock.getType() == Material.EMERALD_BLOCK &&
-            ((String)(clickedBlock.getMetadata("management").get(0).value())).equalsIgnoreCase("getvoteurl")) {
+            ((String)(Objects.requireNonNull(clickedBlock.getMetadata("management").get(0).value()))).equalsIgnoreCase("getvoteurl")) {
             event.getPlayer().performCommand("vote#site");
-            return;
         }
     }
 

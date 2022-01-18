@@ -2,8 +2,8 @@ package net.azisaba.afnw.afnwcore2;
 
 import net.azisaba.afnw.afnwcore2.commands.*;
 import net.azisaba.afnw.afnwcore2.listener.*;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Objects;
 
@@ -17,13 +17,14 @@ public final class AfnwCore2 extends JavaPlugin {
     @Override
     public void onEnable() {
         getLogger().info("起動を開始します。");
+        LobbyCommand lobbyCommand = new LobbyCommand(this);
 
         // コマンド登録
         Objects.requireNonNull(getCommand("ticket")).setExecutor(new TicketCommand(this));
         Objects.requireNonNull(getCommand("ticket#give")).setExecutor(new TicketCommand(this));
         Objects.requireNonNull(getCommand("afnw")).setExecutor(new TicketCommand(this));
-        Objects.requireNonNull(getCommand("lobby")).setExecutor(new LobbyCommand());
-        Objects.requireNonNull(getCommand("setvoteurlblock")).setExecutor(new LobbyCommand());
+        Objects.requireNonNull(getCommand("lobby")).setExecutor(lobbyCommand);
+        Objects.requireNonNull(getCommand("setvoteurlblock")).setExecutor(lobbyCommand);
         Objects.requireNonNull(getCommand("vote#site")).setExecutor(new TicketCommand(this));
         getLogger().warning("コマンドを登録しました。");
 
@@ -36,6 +37,9 @@ public final class AfnwCore2 extends JavaPlugin {
         saveDefaultConfig();
         getLogger().warning("Configを設定しました。");
 
+        // SetUrlBlockする
+        lobbyCommand.setVoteUrlBlock();
+        getLogger().info("VoteUrlBlockを配置しました。");
 
         getLogger().info("起動が完了しました。");
     }
