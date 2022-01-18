@@ -11,6 +11,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.viaversion.viaversion.api.Via;
+
 public class PlayerJoinQuitEvent implements Listener {
 
     private final JavaPlugin plugin;
@@ -46,6 +48,12 @@ public class PlayerJoinQuitEvent implements Listener {
             }
         }.runTaskLater(JavaPlugin.getPlugin(AfnwCore2.class), 20*10);
         p.sendTitle(colorPurple + "Afnw", "オープンベータ", 3, 60, 1);
+
+        // viaverでバージョン確認して1.17(775)未満だったら警告
+        if (Via.getAPI().getPlayerVersion(p.getUniqueId()) < 775) {
+            p.sendMessage(colorRed + "A Fall New Worldの推奨バージョンは1.17以上です。");
+            p.sendMessage(colorRed + "推奨バージョン未満で接続していることにより生じた問題はサポート対象外です。");
+        }
 
         // BEユーザーのみ
 

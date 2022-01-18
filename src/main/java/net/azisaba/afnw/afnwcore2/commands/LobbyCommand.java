@@ -14,11 +14,15 @@ import org.bukkit.plugin.Plugin;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * ロビーに関係するコマンド類
+ */
 public class LobbyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         final String prefix = "[AfnwCore2] ";
 
+        // これらのコマンドはプレイヤー用なのでそれ以外は弾く
         if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + prefix + "このコマンドはプレイヤー専用です．");
             return true;
@@ -42,6 +46,7 @@ public class LobbyCommand implements CommandExecutor {
         }
         else if (!command.getName().equalsIgnoreCase("lobby")) return true;
 
+        // lobbyコマンドはロビー以外にいるプレイヤーをロビーに飛ばす
         Location point = lobby.getSpawnLocation();
 
         if (Objects.requireNonNull(player.getWorld()) == lobby) {
@@ -55,6 +60,7 @@ public class LobbyCommand implements CommandExecutor {
             player.teleport(point);
         }
         else {
+            // admin以外は待機時間を取る（5秒にしてある）
             int waitSec = 5;
             player.sendMessage(ChatColor.AQUA + prefix + "ロビーへ移動します......" + waitSec + "秒待機してください．");
             Bukkit.getScheduler().runTaskLater(
