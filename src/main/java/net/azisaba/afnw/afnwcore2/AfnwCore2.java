@@ -28,6 +28,7 @@ public final class AfnwCore2 extends JavaPlugin {
         getLogger().info("起動を開始します。");
         LobbyCommand lobbyCommand = new LobbyCommand(this);
         TicketCommand ticketCommand = new TicketCommand(this);
+        UtilCommand utilCommand = new UtilCommand();
 
         // コマンド登録
         Objects.requireNonNull(getCommand("ticket")).setExecutor(ticketCommand);
@@ -37,12 +38,16 @@ public final class AfnwCore2 extends JavaPlugin {
         Objects.requireNonNull(getCommand("setvoteurlblock")).setExecutor(lobbyCommand);
         Objects.requireNonNull(getCommand("vote#site")).setExecutor(ticketCommand);
         Objects.requireNonNull(getCommand("reload#config")).setExecutor(ticketCommand);
+        Objects.requireNonNull(getCommand("trash")).setExecutor(utilCommand);
+        Objects.requireNonNull(getCommand("pc")).setExecutor(utilCommand);
+        Objects.requireNonNull(getCommand("ec")).setExecutor(utilCommand);
         getLogger().warning("コマンドを登録しました。");
 
         // イベント登録
         getServer().getPluginManager().registerEvents(new PlayerJoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new AFKTeleporter(), this);
         getServer().getPluginManager().registerEvents(new Lobby(), this);
+        getServer().getPluginManager().registerEvents(new AntiBreakEvent(), this);
 
         // 状態登録
         if(stateMap.containsValue(true) || stateMap.containsValue(null)) {

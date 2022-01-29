@@ -43,4 +43,9 @@ commands:
     description: lobbyに帰ります。
   reload#config:
     permission: afnwcore2.commands.reload#config
-
+  trash:
+    description: ゴミ箱を開きます。
+  pc:
+    description: エンダーチェストを開きます。
+  ec:
+    description: エンダーチェストを開きます。
