@@ -47,5 +47,5 @@ commands:
     description: ゴミ箱を開きます。
   pc:
     description: エンダーチェストを開きます。
-  ec:
-    description: エンダーチェストを開きます。
+    aliases:
+      - ec
